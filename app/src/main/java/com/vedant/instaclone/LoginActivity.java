@@ -48,8 +48,10 @@ public class LoginActivity extends AppCompatActivity {
 
         if(ParseUser.getCurrentUser()!=null)
         {
-            ParseUser.getCurrentUser();
-            ParseUser.logOut();
+//            ParseUser.getCurrentUser();
+//            ParseUser.logOut();
+            Intent intent = new Intent(LoginActivity.this,SocialMediaApplication.class);
+            startActivity(intent);
         }
 
     }
@@ -66,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                 {
                     Toast.makeText(LoginActivity.this, "complete the fields",
                             Toast.LENGTH_SHORT).show();
+
                 }else {
                     ParseUser.logInInBackground(loginusername.getText().toString(),
                             loginpass.getText().toString(), new LogInCallback() {
@@ -76,6 +79,8 @@ public class LoginActivity extends AppCompatActivity {
                                                         "logged in " +
                                                         "successfully",
                                                 Toast.LENGTH_SHORT).show();
+                                        Intent intent1 = new Intent(LoginActivity.this,SocialMediaApplication.class);
+                                        startActivity(intent1);
                                     } else {
                                         Toast.makeText(LoginActivity.this, "error found",
                                                 Toast.LENGTH_SHORT).show();
@@ -96,4 +101,6 @@ public class LoginActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
 }

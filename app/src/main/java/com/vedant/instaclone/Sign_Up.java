@@ -50,8 +50,10 @@ public class Sign_Up extends AppCompatActivity {
         msignup1.setOnClickListener(this::onClick);
 
         if (ParseUser.getCurrentUser() != null) {
-            ParseUser.getCurrentUser();
-            ParseUser.logOut();
+//            ParseUser.getCurrentUser();
+//            ParseUser.logOut();
+            Intent intent = new Intent(Sign_Up.this,SocialMediaApplication.class);
+            startActivity(intent);
         }
     }
 
@@ -68,6 +70,9 @@ public class Sign_Up extends AppCompatActivity {
                 {
                     Toast.makeText(Sign_Up.this, "complete the fields",
                             Toast.LENGTH_SHORT).show();
+
+
+
                 }else {
                     final ParseUser appuser = new ParseUser();
                     appuser.setEmail(mEmail1.getText().toString());
@@ -79,9 +84,12 @@ public class Sign_Up extends AppCompatActivity {
                     appuser.signUpInBackground(new SignUpCallback() {
                         @Override
                         public void done(ParseException e) {
-                            if (e == null)
+                            if (e == null) {
                                 Toast.makeText(Sign_Up.this, "User created successfully",
                                         Toast.LENGTH_SHORT).show();
+                                Intent intent1 = new Intent(Sign_Up.this,SocialMediaApplication.class);
+                                startActivity(intent1);
+                            }
                             else {
                                 Toast.makeText(Sign_Up.this, "error found", Toast.LENGTH_SHORT).show();
                             }
