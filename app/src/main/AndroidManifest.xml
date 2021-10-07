@@ -12,7 +12,8 @@
         android:theme="@style/Theme.InstaClone">
         <activity
             android:name=".SocialMediaApplication"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".LoginActivity"
             android:exported="true" />
