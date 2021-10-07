@@ -2,9 +2,12 @@ package com.vedant.instaclone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,73 +20,89 @@ import com.parse.SignUpCallback;
 
 public class Sign_Up extends AppCompatActivity {
 
-private EditText musername1,mpass1,musername2,mpass2;
-private Button signup,login;
+
+    private EditText mEmail1, SignUsername, signpass;
+    private Button msignup1, login1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        musername1 = findViewById(R.id.musername1);
-        musername2 = findViewById(R.id.musername2);
-        mpass1 = findViewById(R.id.mpass1);
-        mpass2 = findViewById(R.id.mpass2);
-        signup = findViewById(R.id.msignup);
-        login = findViewById(R.id.login);
+        setTitle("Sign Up");
+        mEmail1 = findViewById(R.id.mEmail1);
+        SignUsername = findViewById(R.id.SignUsername);
+        signpass = findViewById(R.id.signpass);
+       signpass.setOnKeyListener(new View.OnKeyListener() {
+           @Override
+           public boolean onKey(View view, int i, KeyEvent keyEvent) {
+               if(i == KeyEvent.KEYCODE_ENTER && keyEvent.getAction()==KeyEvent.ACTION_DOWN)
+               {
+                   onClick(signpass);
+               }
+               return false;
+           }
+       });
+        msignup1 = findViewById(R.id.msignup1);
+        login1 = findViewById(R.id.login1);
 
-         signup.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
+        login1.setOnClickListener(this::onClick);
+        msignup1.setOnClickListener(this::onClick);
 
-                 ParseUser appUser = new ParseUser();
-                 appUser.setUsername(musername1.getText().toString());
-                 appUser.setPassword(mpass1.getText().toString());
-
-                 appUser.signUpInBackground(new SignUpCallback() {
-                     @Override
-                     public void done(ParseException e) {
-                         if(e==null)
-                         {
-                             Toast.makeText(Sign_Up.this, "User Created Successfully",
-                                     Toast.LENGTH_SHORT).show();
-                         }
-
-                         else
-                         {
-                             Toast.makeText(Sign_Up.this, "error found",
-                                     Toast.LENGTH_SHORT).show();
-                         }
-                     }
-                 });
-             }
-         });
-
-         login.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-
-                 ParseUser.logInInBackground(musername2.getText().toString(),
-                         mpass2.getText().toString(), new LogInCallback() {
-                             @Override
-                             public void done(ParseUser user, ParseException e) {
-                                 if(e==null && user!=null)
-
-                                 {
-                                     Toast.makeText(Sign_Up.this, "login successfully",
-                                             Toast.LENGTH_SHORT).show();
-                                     Intent intent = new Intent(Sign_Up.this,MainActivity.class);
-                                     startActivity(intent);
-                                 }
-
-                                 else
-                                 {
-                                     Toast.makeText(Sign_Up.this, "error found",
-                                             Toast.LENGTH_SHORT).show();
-                                 }
-                             }
-                         });
-             }
-         });
+        if (ParseUser.getCurrentUser() != null) {
+            ParseUser.getCurrentUser();
+            ParseUser.logOut();
+        }
     }
+
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.login1:
+                Toast.makeText(Sign_Up.this, "login clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.msignup1:
+
+                if (mEmail1.getText().toString().equals("") || SignUsername.getText().toString().equals("") || signpass.getText().toString().equals(""))
+                {
+                    Toast.makeText(Sign_Up.this, "complete the fields",
+                            Toast.LENGTH_SHORT).show();
+                }else {
+                    final ParseUser appuser = new ParseUser();
+                    appuser.setEmail(mEmail1.getText().toString());
+                    appuser.setUsername(SignUsername.getText().toString());
+                    appuser.setPassword(signpass.getText().toString());
+                    ProgressDialog progressDialog = new ProgressDialog(this);
+                    progressDialog.setMessage("Signing Up" + SignUsername.getText().toString());
+                    progressDialog.show();
+                    appuser.signUpInBackground(new SignUpCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e == null)
+                                Toast.makeText(Sign_Up.this, "User created successfully",
+                                        Toast.LENGTH_SHORT).show();
+                            else {
+                                Toast.makeText(Sign_Up.this, "error found", Toast.LENGTH_SHORT).show();
+                            }
+
+                            progressDialog.dismiss();
+                        }
+                    });
+                }
+                break;
+        }
+    }
+
+     public void closeKeyboard(View view)
+     {
+         try {
+             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+             inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+         }catch (Exception e)
+         {
+             e.printStackTrace();
+         }
+     }
+
 }
