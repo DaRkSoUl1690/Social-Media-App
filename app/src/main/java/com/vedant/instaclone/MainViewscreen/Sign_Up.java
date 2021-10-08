@@ -1,4 +1,4 @@
-package com.vedant.instaclone;
+package com.vedant.instaclone.MainViewscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,11 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.parse.LogInCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+import com.vedant.instaclone.R;
 
 public class Sign_Up extends AppCompatActivity {
 
@@ -52,7 +51,7 @@ public class Sign_Up extends AppCompatActivity {
         if (ParseUser.getCurrentUser() != null) {
 //            ParseUser.getCurrentUser();
 //            ParseUser.logOut();
-            Intent intent = new Intent(Sign_Up.this,SocialMediaApplication.class);
+            Intent intent = new Intent(Sign_Up.this, SocialMediaApplication.class);
             startActivity(intent);
         }
     }

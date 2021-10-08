@@ -1,4 +1,4 @@
-package com.vedant.instaclone;
+package com.vedant.instaclone.MainViewscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
 import com.vedant.instaclone.Adapters.TabAdapters;
+import com.vedant.instaclone.R;
 
 public class SocialMediaApplication extends AppCompatActivity {
 

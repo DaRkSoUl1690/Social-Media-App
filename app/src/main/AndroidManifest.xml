@@ -11,14 +11,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InstaClone">
         <activity
-            android:name=".SocialMediaApplication"
+            android:name=".MainViewscreen.SocialMediaApplication"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
-            android:name=".LoginActivity"
+            android:name=".MainViewscreen.LoginActivity"
             android:exported="true" />
         <activity
-            android:name=".Sign_Up"
+            android:name=".MainViewscreen.Sign_Up"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,7 +38,7 @@
             android:value="@string/back4app_server_url" />
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>
