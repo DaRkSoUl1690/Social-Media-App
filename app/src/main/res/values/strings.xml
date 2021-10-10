@@ -3,4 +3,6 @@
     <string name="back4app_server_url">https://parseapi.back4app.com/</string>
     <string name="back4app_server_id">UfVPbP0ACrQORKIDs3FeiBbuQSwmbpQV5Wgo1FGQ</string>
     <string name="back4app_client_key">rlH3T0b4fdqwTvXc16wa7E3qbCTbHL6RJMZ0VJAC</string>
+    <string name="post_image">Post Image</string>
+    <string name="logout">Logout</string>
 </resources>

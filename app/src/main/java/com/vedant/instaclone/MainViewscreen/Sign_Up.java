@@ -32,27 +32,29 @@ public class Sign_Up extends AppCompatActivity {
         mEmail1 = findViewById(R.id.mEmail1);
         SignUsername = findViewById(R.id.SignUsername);
         signpass = findViewById(R.id.signpass);
-       signpass.setOnKeyListener(new View.OnKeyListener() {
-           @Override
-           public boolean onKey(View view, int i, KeyEvent keyEvent) {
-               if(i == KeyEvent.KEYCODE_ENTER && keyEvent.getAction()==KeyEvent.ACTION_DOWN)
-               {
-                   onClick(signpass);
-               }
-               return false;
-           }
-       });
+
         msignup1 = findViewById(R.id.msignup1);
         login1 = findViewById(R.id.login1);
-
+        signpass.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if(i == KeyEvent.KEYCODE_ENTER && keyEvent.getAction()==KeyEvent.ACTION_DOWN)
+                {
+                    onClick(msignup1);
+                }
+                return false;
+            }
+        });
         login1.setOnClickListener(this::onClick);
         msignup1.setOnClickListener(this::onClick);
+
 
         if (ParseUser.getCurrentUser() != null) {
 //            ParseUser.getCurrentUser();
 //            ParseUser.logOut();
             Intent intent = new Intent(Sign_Up.this, SocialMediaApplication.class);
             startActivity(intent);
+            finish();
         }
     }
 
@@ -88,6 +90,7 @@ public class Sign_Up extends AppCompatActivity {
                                         Toast.LENGTH_SHORT).show();
                                 Intent intent1 = new Intent(Sign_Up.this,SocialMediaApplication.class);
                                 startActivity(intent1);
+                                finish();
                             }
                             else {
                                 Toast.makeText(Sign_Up.this, "error found", Toast.LENGTH_SHORT).show();

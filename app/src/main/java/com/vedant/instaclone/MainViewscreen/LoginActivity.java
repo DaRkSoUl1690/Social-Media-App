@@ -30,18 +30,18 @@ public class LoginActivity extends AppCompatActivity {
        setTitle("Login");
         loginusername = findViewById(R.id.loginusername);
         loginpass = findViewById(R.id.loginpass);
+        msignup2 = findViewById(R.id.msignup2);
+        login2 = findViewById(R.id.login2);
         loginpass.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
                 if(i == KeyEvent.KEYCODE_ENTER && keyEvent.getAction()==KeyEvent.ACTION_DOWN)
                 {
-                    onClick(loginpass);
+                    onClick(login2);
                 }
                 return false;
             }
         });
-        msignup2 = findViewById(R.id.msignup2);
-        login2 = findViewById(R.id.login2);
 
         msignup2.setOnClickListener(this::onClick);
         login2.setOnClickListener(this::onClick);
@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 //            ParseUser.logOut();
             Intent intent = new Intent(LoginActivity.this, SocialMediaApplication.class);
             startActivity(intent);
+            finish();
         }
 
     }
@@ -81,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 Toast.LENGTH_SHORT).show();
                                         Intent intent1 = new Intent(LoginActivity.this,SocialMediaApplication.class);
                                         startActivity(intent1);
+                                        finish();
                                     } else {
                                         Toast.makeText(LoginActivity.this, "error found",
                                                 Toast.LENGTH_SHORT).show();
