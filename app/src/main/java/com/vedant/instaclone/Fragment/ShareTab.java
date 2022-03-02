@@ -66,8 +66,7 @@ public class ShareTab extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.imgshare:
 
-
-                if (android.os.Build.VERSION.SDK_INT >= 23 &&
+            if (android.os.Build.VERSION.SDK_INT >= 23 &&
                         ActivityCompat.checkSelfPermission(requireContext(),
                                 Manifest.permission.READ_EXTERNAL_STORAGE)
                                 != PackageManager.PERMISSION_GRANTED) {
@@ -103,16 +102,13 @@ public class ShareTab extends Fragment implements View.OnClickListener {
                         final ProgressDialog dialog = new ProgressDialog(getContext());
                         dialog.setMessage("Loading...");
                         dialog.show();
-                        parseObject.saveInBackground(new SaveCallback() {
-                            @Override
-                            public void done(ParseException e) {
-                                if (e == null) {
-                                    Toast.makeText(getContext(), "Done!!!", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(getContext(), "Unknown error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                                dialog.dismiss();
+                        parseObject.saveInBackground(e -> {
+                            if (e == null) {
+                                Toast.makeText(getContext(), "Done!!!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getContext(), "Unknown error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
+                            dialog.dismiss();
                         });
 
 

@@ -1,11 +1,5 @@
 package com.vedant.instaclone.MainViewscreen;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.viewpager.widget.ViewPager;
-
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -15,57 +9,55 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-
-import com.google.android.material.tabs.TabLayout;
-import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 import com.vedant.instaclone.Adapters.TabAdapters;
 import com.vedant.instaclone.R;
+import com.vedant.instaclone.databinding.ActivitySocialMediaApplicationBinding;
 
 import java.io.ByteArrayOutputStream;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 public class SocialMediaApplication extends AppCompatActivity {
 
-    private Toolbar toolbar;
-    private ViewPager viewPager;
-    private TabLayout tabLayout;
-    private TabAdapters tabAdapters;
+    ActivitySocialMediaApplicationBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social_media_application);
+        binding = ActivitySocialMediaApplicationBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         setTitle("Social Media App!!!");
 
-        toolbar = findViewById(R.id.mytoolbar);
-         setSupportActionBar(toolbar);
+        Toolbar toolbar = findViewById(R.id.mytoolbar);
+        setSupportActionBar(toolbar);
 
-        viewPager = findViewById(R.id.viewPager);
-        tabAdapters = new TabAdapters(getSupportFragmentManager());
-        viewPager.setAdapter(tabAdapters);
+        TabAdapters tabAdapters = new TabAdapters(getSupportFragmentManager());
 
-        tabLayout = findViewById(R.id.tabLayout);
-        tabLayout.setupWithViewPager(viewPager, false);
+        binding.viewPager.setAdapter(tabAdapters);
+
+        binding.tabLayout.setupWithViewPager(binding.viewPager, false);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-         getMenuInflater().inflate(R.menu.menu,menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.postImageItem)
-        {
+        if (item.getItemId() == R.id.postImageItem) {
 
             if (android.os.Build.VERSION.SDK_INT >= 23 &&
                     checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -117,7 +109,7 @@ public class SocialMediaApplication extends AppCompatActivity {
         startActivityForResult(intent, 4000);
 
     }
-
+/**Getting path of captured image in Android using camera intent*/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -125,7 +117,6 @@ public class SocialMediaApplication extends AppCompatActivity {
         if (requestCode == 4000 && resultCode == RESULT_OK && data != null) {
 
             try {
-
                 Uri capturedImage = data.getData();
                 Bitmap bitmap = MediaStore.Images.Media.
                         getBitmap(this.getContentResolver(),
@@ -141,17 +132,14 @@ public class SocialMediaApplication extends AppCompatActivity {
                 final ProgressDialog dialog = new ProgressDialog(this);
                 dialog.setMessage("Loading...");
                 dialog.show();
-                parseObject.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        if (e == null) {
-                            Toast.makeText(SocialMediaApplication.this, "Pictured Uploaded!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(SocialMediaApplication.this,  "Unknown error:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                parseObject.saveInBackground(e -> {
+                    if (e == null) {
+                        Toast.makeText(SocialMediaApplication.this, "Pictured Uploaded!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(SocialMediaApplication.this, "Unknown error:" + e.getMessage(), Toast.LENGTH_SHORT).show();
 
-                        }
-                        dialog.dismiss();
                     }
+                    dialog.dismiss();
                 });
 
 

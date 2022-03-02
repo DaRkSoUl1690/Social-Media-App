@@ -42,38 +42,41 @@ public class ProfileTab extends Fragment {
         btnUpdateInfo = view.findViewById(R.id.btnUpdateInfo);
 
         final ParseUser parseUser = ParseUser.getCurrentUser();
+if(edtProfileName != null) {
+    edtProfileName.setText(parseUser.get("profileName") + "");
+}else
+{
 
-        edtProfileName.setText(parseUser.get("profileName")+"");
+    edtProfileName.setText("");
+}
+
         edtProfileBio.setText(parseUser.get("profileBio")+"");
         edtProfileProfession.setText(parseUser.get("profileProfession")+"");
         edtProfileHobbies.setText(parseUser.get("profileHobbies")+"");
         edtProfileFavSport.setText(parseUser.get("profileFavSport")+"");
 
-        btnUpdateInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btnUpdateInfo.setOnClickListener(v -> {
 
-                parseUser.put("profileName", edtProfileName.getText().toString());
-                parseUser.put("profileBio", edtProfileBio.getText().toString());
-                parseUser.put("profileProfession", edtProfileProfession.getText().toString());
-                parseUser.put("profileHobbies", edtProfileHobbies.getText().toString());
-                parseUser.put("profileFavSport", edtProfileFavSport.getText().toString());
+            parseUser.put("profileName", edtProfileName.getText().toString());
+            parseUser.put("profileBio", edtProfileBio.getText().toString());
+            parseUser.put("profileProfession", edtProfileProfession.getText().toString());
+            parseUser.put("profileHobbies", edtProfileHobbies.getText().toString());
+            parseUser.put("profileFavSport", edtProfileFavSport.getText().toString());
 
-                parseUser.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        if (e == null) {
+            parseUser.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if (e == null) {
 
-                            Toast.makeText(getContext(), "done", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "done", Toast.LENGTH_SHORT).show();
 
-                        } else {
-                            Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
 
-                        }
                     }
-                });
+                }
+            });
 
-            }
         });
 
         return view;
