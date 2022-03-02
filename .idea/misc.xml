@@ -3,7 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/instaClone/app/src/main/res/drawable/camera_item.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/instaClone/app/src/main/res/drawable/person.xml" value="0.234375" />
+        <entry key="..\:/AndroidStudioProjects/instaClone/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
+        <entry key="..\:/AndroidStudioProjects/instaClone/app/src/main/res/layout/activity_main.xml" value="0.19199999414062519" />
         <entry key="..\:/AndroidStudioProjects/instaClone/app/src/main/res/layout/activity_sign_up.xml" value="0.25343999226562525" />
+        <entry key="..\:/AndroidStudioProjects/instaClone/app/src/main/res/layout/activity_social_media_application.xml" value="0.21822916666666667" />
+        <entry key="..\:/AndroidStudioProjects/instaClone/app/src/main/res/layout/activity_user_post.xml" value="0.19199999414062519" />
+        <entry key="..\:/AndroidStudioProjects/instaClone/app/src/main/res/layout/fragment_profile_tab.xml" value="0.21822916666666667" />
+        <entry key="..\:/AndroidStudioProjects/instaClone/app/src/main/res/layout/fragment_share_tab.xml" value="0.21822916666666667" />
+        <entry key="..\:/AndroidStudioProjects/instaClone/app/src/main/res/layout/fragment_user_tab.xml" value="0.19199999414062519" />
+        <entry key="..\:/AndroidStudioProjects/instaClone/app/src/main/res/menu/menu.xml" value="0.25343999226562525" />
       </map>
     </option>
   </component>
